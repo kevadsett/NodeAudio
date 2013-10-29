@@ -134,3 +134,4 @@ function ease(value, target, easing, precision) {
     }
     return value;
 }
+

@@ -10,17 +10,14 @@ window.requestAnimFrame = (function(){
 
 var audioContext, frequency;
 window.addEventListener('load', init, false);
+
+var whiteNotes = ["A", "B", "C", "D", "E", "F", "G"],
+    blackNotes = ["A#", "C#", "D#", "F#", "G#"],
+    musicEvents = _.extend({}, Backbone.Events);
+
 function init() {
-    try {
-        // Fix up for prefixing
-        window.AudioContext = window.AudioContext||window.webkitAudioContext;
-        audioContext = new AudioContext();
-    }
-    catch(e) {
-        alert('Web Audio API is not supported in this browser');
-    }
-    
-    var envelope = audioContext.createGain();
+    new AppView();
+    /*var envelope = audioContext.createGain();
     envelope.gain.value = 0;
     
     var sine = audioContext.createOscillator();
@@ -32,7 +29,7 @@ function init() {
     
     var gain = audioContext.createGain();
     gain.gain.value = 6;
-    gain.connect(sine.frequency)
+    gain.connect(sine.frequency);
     
     var lfo = audioContext.createOscillator();
     lfo.frequency.value = 4;
@@ -50,10 +47,10 @@ function init() {
         var step, ratio;
         if(e.clientY / window.innerHeight >=0.5) {
             step = Math.round(mapValue(e.clientX, 0, window.innerWidth, 0, majorScale.length -1));
-            ratio = Math.pow(2, majorScale[step]/12);
+            ratio = getFreqFromNoteNumber(majorScale[step]);
         } else {
             step = Math.round(mapValue(e.clientX, 0, window.innerWidth, 0, incidentals.length -1));
-            ratio = Math.pow(2, incidentals[step]/12);
+            ratio = getFreqFromNoteNumber(incidentals[step]);
         }
         
         var freq = ratio * 440;
@@ -65,16 +62,16 @@ function init() {
         sine.frequency.value = freq;
         
     });
-    
+    */
     this.requestAnimFrame(loop);
 
     function loop() {
         this.requestAnimFrame(loop);
-        if(envelope.gain.value > 0) {
+        /*if(envelope.gain.value > 0) {
             envelope.gain.value -= 0.025;
             console.log(envelope.gain.value);
         } else {
             envelope.gain.value = 0;
-        }
+        }*/
     }
 }

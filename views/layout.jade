@@ -2,9 +2,17 @@ doctype 5
 html
   head
     title= title
+    script(type='text/javascript', src='/javascripts/libs/jquery-1.10.2.min.js')
+    script(type='text/javascript', src='/javascripts/libs/underscore.js')
+    script(type='text/javascript', src='/javascripts/libs/backbone.js')
     script(type='text/javascript', src='/javascripts/libs/minivents.min.js')
     script(type='text/javascript', src='/javascripts/utils.js')
+    script(type='text/javascript', src='/javascripts/models/keyModel.js')
+    script(type='text/javascript', src='/javascripts/collections/keyboard.js')
+    script(type='text/javascript', src='/javascripts/views/appView.js')
+    script(type='text/javascript', src='/javascripts/views/keyboardView.js')
+    script(type='text/javascript', src='/javascripts/views/keyView.js')
     script(type='text/javascript', src='/javascripts/main.js')
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
+  body.myBody
     block content
