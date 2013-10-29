@@ -12,7 +12,7 @@ var AppView = Backbone.View.extend({
         
         var keyModels = [],
             offset = 24,
-            numKeys = 61;
+            numKeys = 49;
         for(var i = offset; i < offset + numKeys; i++) {
             keyModels.push(new KeyModel({noteNumber: i, offset: offset}));
         }

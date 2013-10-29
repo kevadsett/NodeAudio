@@ -1,15 +1,15 @@
 var KeyModel = Backbone.Model.extend({
     defaults: {
         noteNumber: 0,
-        width: 12
+        width: 15
     },
     initialize: function() {
         this.set('frequency', this.getFreq());
         this.set('noteName', this.getNoteName());
         this.set('isWhiteNote', _.contains(whiteNotes, this.get('noteName')));
-        this.set({height: this.get('isWhiteNote') ? 70 : 50,
-                  width: this.get('isWhiteNote') ? 15 : 10});
-        this.set({x: (this.get('noteNumber') - this.get('offset')) * (this.get('isWhiteNote') ? 15 : 10), 
+        this.set({height: this.get('isWhiteNote') ? 70 : 50});
+                  //width: this.get('isWhiteNote') ? 15 : 10});
+        this.set({x: (this.get('noteNumber') - this.get('offset')) * this.get('width'),//(this.get('isWhiteNote') ? 15 : 10), 
                   y: this.get('isWhiteNote') ? 2 : 0});
     },
     getFreq: function() {
