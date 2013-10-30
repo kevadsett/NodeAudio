@@ -1,16 +1,14 @@
 var KeyModel = Backbone.Model.extend({
     defaults: {
-        noteNumber: 0,
-        width: 15
+        noteNumber: 0
     },
     initialize: function() {
         this.set('frequency', this.getFreq());
         this.set('noteName', this.getNoteName());
-        this.set('isWhiteNote', _.contains(whiteNotes, this.get('noteName')));
-        this.set({height: this.get('isWhiteNote') ? 70 : 50});
-                  //width: this.get('isWhiteNote') ? 15 : 10});
-        this.set({x: (this.get('noteNumber') - this.get('offset')) * this.get('width'),//(this.get('isWhiteNote') ? 15 : 10), 
-                  y: this.get('isWhiteNote') ? 2 : 0});
+        this.set('isWhiteKey', _.contains(whiteNotes, this.get('noteName').replace(/\d/g, "")));
+        this.set({height: this.get('isWhiteKey') ? 120 : 70,
+                  width: this.get('isWhiteKey') ? 25 : 20});
+        this.set({y: this.get('isWhiteKey') ? 2 : 0});
     },
     getFreq: function() {
         var bottomC = 8.1757989156;
@@ -18,37 +16,52 @@ var KeyModel = Backbone.Model.extend({
     },
     getNoteName: function() {
         var noteNum = this.get('noteNumber') % 12;
+        var noteName = "";
         switch(noteNum) {
             case 0: 
-                return "C";
+                noteName = "C";
+                break;
             case 1:
-                return "C#";
+                noteName = "C#";
+                break;
             case 2:
-                return "D";
+                noteName = "D";
+                break;
             case 3:
-                return "D#";
+                noteName = "D#";
+                break;
             case 4:
-                return "E";
+                noteName = "E";
+                break;
             case 5:
-                return "F";
+                noteName = "F";
+                break;
             case 6:
-                return "F#";
+                noteName = "F#";
+                break;
             case 7:
-                return "G";
+                noteName = "G";
+                break;
             case 8:
-                return "G#";
+                noteName = "G#";
+                break;
             case 9:
-                return "A";
+                noteName = "A";
+                break;
             case 10:
-                return "A#";
+                noteName = "A#";
+                break;
             case 11:
-                return "B";
+                noteName = "B";
+                break;
         }
+        noteName += Math.floor(this.get('noteNumber') / 12);
+        return noteName;
+    },
+    positionIsWithinBounds: function(position) {
+        return (position.x > this.get('x') - this.get('width') / 2 &&
+            position.x < this.get('x') + this.get('width') / 2 &&
+            position.y > this.get('y') &&
+            position.y < this.get('y') + this.get('height'));
     }
 });
-
-
-function keyModel(noteNumber) {
-    this.noteNumber = noteNumber;
-    this.frequency = getFreqFromNoteNumber(noteNumber);
-}

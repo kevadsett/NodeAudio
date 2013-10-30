@@ -1,9 +1,9 @@
 var Keyboard = Backbone.Collection.extend({
-    model:keyModel,
+    model:KeyModel,
     getWhiteNotes: function() {
-        return new Keyboard(this.where({isWhiteNote: true}));
+        return new Keyboard(this.where({isWhiteKey: true}));
     },
     getBlackNotes: function() {
-        return new Keyboard(this.where({isWhiteNote: false}));
+        return new Keyboard(this.where({isWhiteKey: false}));
     }
 });

@@ -1,17 +1,17 @@
 var KeyView = Backbone.View.extend({
     initialize: function() {
-        //console.log(this.model.get('noteName') + " is a white note: " + this.model.get('isWhiteNote'));
-        this.listenTo(musicEvents, "render", this.render);
+        this.listenTo(musicEvents, (this.model.get('isWhiteKey') ? "renderWhiteKeys": "renderBlackKeys"), this.render);
     },
     render: function(context) {
-        if(this.model.get('isWhiteNote')) {
-            context.fillStyle = "#EEEEEE";
-        } else {
-            context.fillStyle = "#333333";
-        }
-        context.fillRect(this.model.get('x'), this.model.get('y'), this.model.get('width'), this.model.get('height'));
-        context.strokeStyle = "#000000";
-        context.rect(this.model.get('x'), this.model.get('y'), this.model.get('width'), this.model.get('height'));
+        var x = this.model.get('x'),
+            y = this.model.get('y'),
+            w =this.model.get('width'),
+            h = this.model.get('height');
+        context.beginPath();
+        context.rect(x - w/2, y, w, h);
+        context.fill();
+        context.strokeStyle = "#000000"
         context.stroke();
+        context.closePath();
     }
 });
